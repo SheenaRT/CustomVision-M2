@@ -61,6 +61,10 @@ app.post('/classifyuploadimage', upload.single('image'), async (req, res) => {
   }
 });
 
+//testing purposes
+
+// app.get('/', (req, res) => res.send('App is running fine'));
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server confirmed for http://localhost:${PORT}`);
