@@ -11,29 +11,6 @@ const upload = multer({ storage: storage });
 app.use(express.json());
 app.use(cors());
 
-// app.post('/classifyuploadimage', upload.single('image'), async (req, res) => {
-//   const imageBuffer = req.file.buffer;
-//   //test
-//   // Custom Vision API endpoint and prediction key
-//   const apiUrl =
-//     'https://carrecognition-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/ec0a3564-e910-4696-85c0-4bfc5bcad21c/classify/iterations/Iteration2/image';
-//   const predictionKey = 'deada5e2d236460abff2bf2b0c9f1616';
-//   try {
-//     const response = await axios.post(apiUrl, imageBuffer, {
-//       headers: {
-//         'Prediction-Key': predictionKey,
-//         'Content-Type': 'application/octet-stream',
-//       },
-//     });
-
-//     // Respond with the classification result
-//     res.json(response.data);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'An error occurred' });
-//   }
-// });
-
 const classifyUploadImage = async (req, res) => {
   const imageBuffer = req.file.buffer;
 
