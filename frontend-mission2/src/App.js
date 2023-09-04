@@ -1,12 +1,18 @@
 import NavbarST from './components/NavbarST';
-import ImageUploader from './components/ImageUploader';
+import AddCar from './components/AddCar';
+import DeleteCar from './components/DeleteCar';
+import CarList from './components/CarList';
+import UpdateCar from './components/UpdateCar';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <NavbarST />
-      <ImageUploader />
+      <AddCar />
+      <CarList />
+      <UpdateCar />
+      <DeleteCar />
     </div>
   );
 }
