@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./AddCars.css";
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = "http://localhost:4000";
 
 function AddCar() {
-  const [car, setCar] = useState({ Make: '', Model: '', Year: '', Amount: '' });
+  const [car, setCar] = useState({ Make: "", Model: "", Year: "", Amount: "" });
   const [carsData, setCarsData] = useState([]);
   const [showCarsList, setShowCarsList] = useState(false);
-  const [isAdded, setIsAdded] = useState(false); 
+  const [isAdded, setIsAdded] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get('/api/cars');
+        const response = await axios.get("/api/cars");
         setCarsData(response.data);
       } catch (error) {
         console.error(error);
@@ -20,7 +21,7 @@ function AddCar() {
     }
 
     fetchData();
-  }, [showCarsList]); 
+  }, [showCarsList]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,18 +31,21 @@ function AddCar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/cars', car);
-      setCar({ Make: '', Model: '', Year: '', Amount: '' });
-      setShowCarsList(!showCarsList); 
-      setIsAdded(true); 
+      await axios.post("/api/cars", car);
+      setCar({ Make: "", Model: "", Year: "", Amount: "" });
+      setShowCarsList(!showCarsList);
+      setIsAdded(true);
     } catch (error) {
       console.error(error);
-      setIsAdded(false); 
+      setIsAdded(false);
     }
   };
 
+  const columns = 4;
+  const rows = 6;
+
   return (
-    <div>
+    <div className="add-car-container">
       <h2>Create a New Car</h2>
       <form onSubmit={handleSubmit}>
         <input
@@ -79,13 +83,35 @@ function AddCar() {
       {showCarsList && (
         <>
           <h2>Cars List</h2>
-          <ul>
-            {carsData.map((car) => (
-              <li key={car._id}>
-                {car.Make} - {car.Model} - {car.Year} - ${car.Amount}
-              </li>
-            ))}
-          </ul>
+          <table className="styled-table">
+            <tbody>
+              {Array.from({ length: rows }).map((_, rowIndex) => (
+                <tr key={rowIndex}>
+                  {Array.from({ length: columns }).map((_, colIndex) => {
+                    const carIndex = rowIndex * columns + colIndex;
+                    const currentCar = carsData[carIndex];
+                    return (
+                      <td key={colIndex}>
+                        {currentCar ? (
+                          <>
+                            <img
+                              src={currentCar.Image}
+                              alt={`${currentCar.Make} ${currentCar.Model}`}
+                            />
+                            <br />
+                            {currentCar.Make} - {currentCar.Model} -{" "}
+                            {currentCar.Year} - ${currentCar.Amount}
+                          </>
+                        ) : (
+                          <></> // Empty cell if no more data
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </>
       )}
     </div>
