@@ -1,7 +1,7 @@
 // routes/cars.js
 const express = require('express');
 const router = express.Router();
-const Car = require('../models/cars'); // Check this line
+const Car = require('../models/customer'); // Check this line
 
 // Route to get all cars
 router.get('/cars', async (req, res) => {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-//Cars Schema
+
 
 const carSchema = mongoose.Schema({
   Make: { type: String },
@@ -18,5 +18,5 @@ const carSchema = mongoose.Schema({
   },
 });
 
-//Define and export
+
 module.exports = mongoose.model('Cars', carSchema);

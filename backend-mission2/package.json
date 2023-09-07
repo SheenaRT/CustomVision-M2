@@ -18,6 +18,8 @@
     "form-data": "^4.0.0",
     "mongodb": "^6.0.0",
     "mongoose": "^7.5.0",
+    "commander": "^11.0.0",
+    "inquirer": "^9.2.10",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
